@@ -1,0 +1,23 @@
+Minimum Viable product design:
+1. User can sign in through email or Google account
+	a) if user signs in through Google account, the app has access to their youtube subscriptions
+		- Users can then look at their list of youtube subscriptions and can choose to remove ones they don't want a newsfeed for 
+	b) if they sign in through email then they have to manually input youtube channels they want to follow
+		- Users input their channels into a textfield and it should show up 
+2. Upon initial sign in, the api will take the latest 3 videos that a user has inputted for the channels they have added to their follow list and summarize them
+3. The newsfeed will show up in a vertically stacked column for the user. Each item that is stacked will show the title of the video and underneath the title a subheading which summarizes the video to show an engaging description of what was discussed in the video
+4. the user can click on one of the rectangular shown headlines to expand the description which will show a more detailed view of the video that is summarized in a separate page
+5. the user can then go back to their main feed
+6. the user can choose to save the description for later viewing
+
+-----------------------------------------------------------------------
+
+- some further ideas that can be added later on:
+	- using LLM Apis, the youtube feeds will be divided into dynamic categories. Ie if the summary revolved around health then the article will show up in the health category, investing category, crypto category, etc. 
+	- users can manually add channels to certain categories they want
+	- for heavy investing content or very informational videos which show charts, the API should take screenshots of specific graphs or concepts and comment over them within the page
+	- users can be able to highlight text and additionally can use a chatbot within a page to ask additional questions regarding the article curated
+	- there should be articles which show overlapping ideas which are suggested to the user based on other youtubers they are following. For example if they are looking at a health related article about weightlifting and another 	  youtuber they follow talks about the same muscle group, then that article should be suggested at the bottom of the article 
+	- 
+
+	

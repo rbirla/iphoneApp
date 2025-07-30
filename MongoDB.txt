@@ -1,0 +1,6 @@
+MongoDB:
+
+Username: birlarahul
+password: Ika6uB9RaIeiLL5I
+
+mongodb+srv://birlarahul:Ika6uB9RaIeiLL5I@newslettercluster.ssnub.mongodb.net/?retryWrites=true&w=majority&appName=NewsletterCluster
