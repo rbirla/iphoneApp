@@ -211,7 +211,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView, Button, ActivityIndicator, Alert,  Platform } from "react-native";
 import {useRoute, useNavigation} from "@react-navigation/native";
-import { Stack } from 'expo-router';
 
 
 import { BASE_URL } from "../api/api";
@@ -225,6 +224,13 @@ const video = parameter?.params?.video; //shorthand way to pull video details th
 
 const [summary, setSummary] = useState(""); //VideoSummary used to hold current value and fetchVideoSummary is the function used to update the state
 const [loading, setLoading] = useState(false);
+
+// Set the header title dynamically using React Navigation
+useEffect(() => {
+  if (video?.title) {
+    navigation.setOptions({ title: "Video Summary: " + video.title });
+  }
+}, [video, navigation]);
 
 console.log("1");
 console.log(parameter.params);
@@ -267,14 +273,9 @@ useEffect(()=>{
   fetchVideoSummary(video.video_id);
 }, [])
 
-  return( 
-  <View>
-    <Stack>
-      <Stack.Screen 
-        name="Video Summary" 
-        options ={({route})=>({title: "Video Summary" + route.params?.title})} /> 
-    </Stack>
-    <Text>{video.title}</Text>
+  return(
+  <View style={{ flex: 1, padding: 20 }}>
+    <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>{video.title}</Text>
     <Text>{summary}</Text>
   </View>
   )
