@@ -1,7 +1,25 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git remote add:*)"
+      "Bash(git remote add:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(git add:*)",
+      "Bash(rmdir:*)",
+      "Bash(npm install)",
+      "Bash(rm:*)",
+      "Bash(pip install:*)",
+      "Bash(uvicorn:*)",
+      "Bash(npm install:*)",
+      "Bash(npm start)",
+      "Bash(rustup --version:*)",
+      "Bash(python -m pip install:*)",
+      "Bash(\"%LOCALAPPDATA%\\\\Android\\\\Sdk\\\\platform-tools\\\\adb.exe\" logcat -d -s ReactNativeJS:V ReactNative:V ExpoModulesCore:V)",
+      "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" logcat -d -s ReactNativeJS)",
+      "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" logcat -d)",
+      "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" reverse tcp:8081 tcp:8081)",
+      "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" shell am force-stop com.rbirla.frontend)",
+      "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" shell monkey -p com.rbirla.frontend 1)"
     ],
     "deny": []
   }

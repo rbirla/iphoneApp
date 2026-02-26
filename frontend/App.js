@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./src/screens/HomeScreen";
 import FeedScreen from "./src/screens/FeedScreen";
 import LoginScreen from "./src/screens/LoginScreen"; // ✅ Import Login screen
+import VideoDetailScreen from "./src/screens/VideoDetailScreen"; // ✅ Import VideoDetail screen
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,11 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Feed" component={FeedScreen} />
+        <Stack.Screen 
+          name="VideoDetail" 
+          component={VideoDetailScreen}
+          options={{ title: "Video Summary" }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

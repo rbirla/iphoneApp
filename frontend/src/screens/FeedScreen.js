@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, ActivityIndicator } from "react-native";
 import { getLatestVideos } from "../api/api"; // ✅ Corrected import
 
-const FeedScreen = ({ route }) => {
-  const { channels } = route.params;
+const FeedScreen = ({ route }) => {//recieves the {channels} which was passed from HomeScreen
+  const { channels } = route.params;//loops through each channel, calls getLaatestVideos and displays the results in a list
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 

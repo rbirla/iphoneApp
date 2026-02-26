@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import GoogleAuth from "../auth/GoogleAuth";
 import { useNavigation } from "@react-navigation/native";
+import { BASE_URL } from "../api/api";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -10,13 +11,45 @@ export default function LoginScreen() {
 
   const handleEmailLogin = () => {
     // For now, just continue to HomeScreen with email
-    navigation.replace("Home", { email });
+    navigation.replace("Home", { email }); //homescreen replaces the login screen 
   };
 
-  const handleGoogleLoginSuccess = async (accessToken) => {
+  const handleGoogleLoginSuccess = async (accessToken, userCredential) => {
     console.log("🎉 Logged in with Google. Token:", accessToken);
-    await getYouTubeSubscriptions(accessToken); // 🧪 Fetch and log subscriptions
-    navigation.replace("Home", { accessToken }); // Then navigate to Home
+    
+    try {
+      // Use backend endpoint to sync subscriptions
+      const userId = userCredential.user.uid;
+      console.log("🔄 Syncing user subscriptions with backend...");
+      
+      const response = await fetch(`${BASE_URL}/sync_user_subscriptions/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_token: accessToken, user_id: userId })
+      });
+      
+      const subscriptionData = await response.json();
+      console.log("✅ Subscriptions synced successfully:", subscriptionData);
+      
+      console.log("📺 Synced subscriptions:", subscriptionData.subscriptions_count);
+      
+      // Navigate to Home screen with user data
+      navigation.replace("Home", { 
+        accessToken,
+        userId,
+        subscriptionsCount: subscriptionData.subscriptions_count
+      });
+      
+    } catch (error) {
+      console.error("❌ Subscription sync failed, but continuing:", error);
+      
+      // Navigate anyway, even if sync fails
+      console.log("📱 Navigating to Home screen without sync...");
+      navigation.replace("Home", { 
+        accessToken,
+        userId: userCredential.user.uid
+      });
+    }
   };
   
 
@@ -41,19 +74,7 @@ export default function LoginScreen() {
   );
 }
 
-const getYouTubeSubscriptions = async (accessToken) => {
-    try {
-      const res = await fetch("https://www.googleapis.com/youtube/v3/subscriptions?part=snippet&mine=true", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      const data = await res.json();
-      console.log("✅ Subscriptions:", data); // For testing
-    } catch (err) {
-      console.error("❌ Error fetching subscriptions:", err);
-    }
-  };
+// YouTube API calls moved to backend - this function is no longer needed
   
 
 const styles = StyleSheet.create({
