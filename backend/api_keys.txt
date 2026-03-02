@@ -1,9 +1,0 @@
------------------------openai api key-----------------------
-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
-
-
------------------------youtube api key: (public data)-----------------------
-AIzaSyBfu1im912BGd3B-zjZhSYVw4XBIQiqj2c
-
------------------------Gemini api key-----------------------
-AIzaSyCpaGQaZamCVLQPspE9m9umxB0YSyHpYzE

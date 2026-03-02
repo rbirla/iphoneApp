@@ -4,6 +4,7 @@ import { BASE_URL } from "../api/api";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import VideoCard from "../components/VideoCard"
 
 const HomeScreen = () => {
   const [channelUrl, setChannelUrl] = useState("");
@@ -87,24 +88,14 @@ const HomeScreen = () => {
       <FlatList
         data={userFeed}
         keyExtractor={(item) => item.video_id}
-        renderItem={({ item }) => {
-            console.log("item is ", item);
-          return (
-          <TouchableOpacity
-            style={{ marginVertical: 10, padding: 10, backgroundColor: '#f5f5f5', borderRadius: 8 }}
-            onPress={() => navigation.navigate('VideoDetail', { video: item })} //passes in entire video object to videodetailscreen.js 
-          >
-            <Text style={{ fontWeight: 'bold', marginBottom: 5 }}>{item.title}</Text>
-            <Text style={{ color: '#666', marginBottom: 3 }}>{item.channel_title}</Text>
-            <Text style={{ color: '#999', fontSize: 12 }}>
-              {new Date(item.published_at).toLocaleDateString()}
-            </Text>
-            <Text style={{ color: '#0066cc', fontSize: 12, marginTop: 5 }}>
-              📝 Tap for AI Summary
-            </Text>
-          </TouchableOpacity>
+        renderItem={({item}) => (
+          <VideoCard
+          video ={item}
+          onPress ={() =>navigation.navigate('VideoDetail', {video:item})}
+          />
         )}
-      }
+
+
         ListEmptyComponent={
           !loading && (
             <Text>No videos found. Make sure you have YouTube subscriptions!</Text>

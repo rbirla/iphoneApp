@@ -13,7 +13,7 @@ load_dotenv()
 
 # Retrieve API keys
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
-GEMINI_API_KEY = "AIzaSyCpaGQaZamCVLQPspE9m9umxB0YSyHpYzE"  # From api_keys.txt
+GEMINI_API_KEY =  os.getenv("GEMINI_API_KEY")  # From api_keys.txt
 MONGO_URI = os.getenv("MONGO_URI")
 
 # Configure Gemini Client
@@ -229,6 +229,7 @@ def summarize_youtube_video(youtube_url):
     """Summarize a YouTube video using Gemini API"""
     prompt = "Please provide a concise 3-4 sentence summary of this video's main content and key points."
     try:
+        printf(f"In summarize_youtube_video before generate+content")
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=[

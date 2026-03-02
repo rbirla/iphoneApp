@@ -22,15 +22,9 @@ useEffect(() => {
   }
 }, [video, navigation]);
 
-console.log("1");
-console.log(parameter.params);
-console.log(parameter.params.video);
-console.log(parameter.params.video.video_id);
-
 useEffect(()=>{
   async function fetchVideoSummary(videoId){
     try{
-      console.log("2");
       setLoading(true);
       const url = `${BASE_URL}/summarize_video/${encodeURIComponent(videoId)}`;
       console.log("3");
