@@ -164,6 +164,14 @@ def get_aggregated_feed(channel_ids: List[str], max_videos_per_channel: int = 3)
     print(f"Fetching aggregated feed from {len(channel_ids)} channels...")
     
     all_videos = []
+
+    """
+    CHANGES: Try to avoid making api requiest in loop. Bulk version of the api.
+
+    If there is no bulk api, we need to set some limits in some way ex: only the most recent 50 or they pick the channels they want, etc
+    """
+
+    # make category api call and store the result in a mpa
     
     for channel_id in channel_ids:
         try:
@@ -185,6 +193,20 @@ def get_aggregated_feed(channel_ids: List[str], max_videos_per_channel: int = 3)
             if "items" in data:
                 for item in data["items"]:
                     if "videoId" in item["id"]:
+                        print(item["id"]["videoId"])
+                        videoId = item["id"]["videoId"]
+
+                        url2 = f"https://www.googleapis.com/youtube/v3/videos"
+                        params2 = {
+                            "key": YOUTUBE_API_KEY,
+                            "id": videoId,
+                            "part": "snippet",
+                        }
+                        
+                        response2 = requests.get(url2, params=params2)
+                        response2.raise_for_status()
+                        data2 = response2.json()
+
                         video_data = {
                             "title": item["snippet"]["title"],
                             "video_id": item["id"]["videoId"],
@@ -192,7 +214,7 @@ def get_aggregated_feed(channel_ids: List[str], max_videos_per_channel: int = 3)
                             "video_url": f"https://youtu.be/{item['id']['videoId']}",
                             "thumbnail_url": item["snippet"]["thumbnails"]["high"]["url"],
                             "channel_title": item["snippet"]["channelTitle"],
-                            "channel_id": channel_id,
+                            "channel_id": channel_id, #use themap and catId to get the text value
                             "description": item["snippet"]["description"]
                         }
                         all_videos.append(video_data)
@@ -362,12 +384,16 @@ def get_user_feed(request: UserSubscriptionSync):
         # Get aggregated feed from all subscribed channels
         feed_videos = get_aggregated_feed(channel_ids, max_videos_per_channel=3)
         
+        # create a map of chanel_Id to thumbnail_url from the subscription list of objects and return it
+        id_to_logo = {sub["channel_id"]: sub["thumbnail_url"]  for sub in subscriptions} 
+
         return {
             "success": True,
             "user_id": request.user_id,
             "subscriptions_count": len(subscriptions),
             "videos_count": len(feed_videos),
-            "videos": feed_videos
+            "videos": feed_videos,
+            "idToLogoMap": id_to_logo
         }
         
     except Exception as e:

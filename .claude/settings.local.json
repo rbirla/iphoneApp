@@ -19,7 +19,8 @@
       "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" logcat -d)",
       "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" reverse tcp:8081 tcp:8081)",
       "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" shell am force-stop com.rbirla.frontend)",
-      "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" shell monkey -p com.rbirla.frontend 1)"
+      "Bash(\"/c/Users/rahul/AppData/Local/Android/Sdk/platform-tools/adb.exe\" shell monkey -p com.rbirla.frontend 1)",
+      "Bash(\"C:/Program Files/Android/Android Studio/jbr/bin/keytool.exe\":*)"
     ],
     "deny": []
   }

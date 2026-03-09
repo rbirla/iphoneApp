@@ -10,6 +10,7 @@ const HomeScreen = () => {
   const [channelUrl, setChannelUrl] = useState("");
   const [channels, setChannels] = useState([]);
   const [userFeed, setUserFeed] = useState([]);
+  const [channelLogos, setChannelLogos] = useState({});
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
   const route = useRoute();
@@ -41,7 +42,8 @@ const HomeScreen = () => {
       
       console.log(`✅ Got ${feedData.videos_count} videos from ${feedData.subscriptions_count} channels`);
       setUserFeed(feedData.videos || []);
-      
+      setChannelLogos(feedData.idToLogoMap || {});
+
     } catch (error) {
       console.error("❌ Error fetching user feed:", error);
     } finally {
@@ -91,6 +93,7 @@ const HomeScreen = () => {
         renderItem={({item}) => (
           <VideoCard
           video ={item}
+          logoMap = {channelLogos || null}
           onPress ={() =>navigation.navigate('VideoDetail', {video:item})}
           />
         )}
