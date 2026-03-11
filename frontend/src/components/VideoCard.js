@@ -39,34 +39,41 @@ Navigation object from the useNavigation() hook
 
     console.log("LOGO IS BELOW");
     console.log(logoMap[video.channel_id]);
+    console.log(video.title);
     
 
 
-    return(
-        <View style = {styles.card}>
+      return (
+          <View style={styles.card}>
+              {/*upper portion of card*/}
+              <View style={styles.cardTop}>
+                  {/* call ChannelPage with the Id channelId={video.channel_id}  */}
+                  <TouchableOpacity onPress={() => navigation.navigate("ChannelPage", { id: video.channel_id })}>
+                      <Image
+                          source={{ uri: logoMap[video.channel_id] }}
+                          style={styles.avatar}
+                      />
+                  </TouchableOpacity>
+                  <Text style>{video.channel_title}</Text>
+              </View>
+              {/*Section of box for the title of the video */}
+              <View>
+                  <Text style = {styles.title}>{video.title}</Text>
+              </View>
+              {/*section of card for video banner */}
+              <View>
+                  <Image source={{ uri: video.thumbnail_url }} style={styles.thumbnail} />
+              </View>
+              {/*bottom portion of card*/}
+              <View style={styles.cardBottom}>
+                  <Text>{timeAgo}</Text>
+              </View>
+          </View>
 
-            {/*upper portion of card*/}
-            <View style={styles.cardTop}>
-                {/* call ChannelPage with the Id channelId={video.channel_id}  */}
-                <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-                    <Image 
-                        source={{uri: logoMap[video.channel_id]}} 
-                        style={styles.avatar} 
-                    />
-                </TouchableOpacity>
-                <Text>{video.channel_title}</Text>
-                <Text>{timeAgo}</Text>
-            </View>
-
-
-        {/*bottom portion of card*/}
-            <View style ={styles.cardBottom}>
-            <Image source = {{uri:video.thumbnail_url}} style ={styles.thumbnail}/>
-            </View>
-
-
-        </View>
-    );}
+    
+          
+      );
+  }
 
     /*
         flexDirection: "row",
@@ -85,16 +92,21 @@ Navigation object from the useNavigation() hook
         card: {
         
             flexDirection: "column",
-            flex: 1,
+            padding: 16,
+           
 
-            marginHorizontal: "10",
+            marginHorizontal: "5",
             marginVertical: 10,
-            backgroundColor: 'green',
+           
+            gap: 10, 
+        },
+        title: {
+            fontSize: 16,
+            fontWeight: "bold",
         },
         cardTop: {
             flexDirection: "row",
-            flex: 1,
-            justifyContent: ""
+            gap: 10,
         },
         avatar: {
             verticalPadding: 100,
@@ -103,14 +115,17 @@ Navigation object from the useNavigation() hook
             borderRadius: 20,
         },
         thumbnail:{
-            verticalPadding: 100,
-            width: 70,
-            height: 70,
+            width: "100%",
+            resizeMode : "cover",
+       
+            aspectRatio: 16/9,
+         
         },
 
+   
+
         cardBottom:{
-            FlexDirection: "row",
-            flex: 1,
+            flexDirection: "row",
         }
 
     })

@@ -75,8 +75,8 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={{ fontSize: 20, fontWeight: "bold" }}>Your Personalized Feed</Text>
+    <View >
+      
       
       {subscriptionsCount && (
         <Text style={{ marginBottom: 10 }}>
@@ -96,6 +96,10 @@ const HomeScreen = () => {
           logoMap = {channelLogos || null}
           onPress ={() =>navigation.navigate('VideoDetail', {video:item})}
           />
+     
+        )}
+       ItemSeparatorComponent={() => (
+          <View style={{ height: 1, backgroundColor: '#ccc',  }} />
         )}
 
 

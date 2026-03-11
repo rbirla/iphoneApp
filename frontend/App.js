@@ -5,6 +5,7 @@ import HomeScreen from "./src/screens/HomeScreen";
 import FeedScreen from "./src/screens/FeedScreen";
 import LoginScreen from "./src/screens/LoginScreen"; // ✅ Import Login screen
 import VideoDetailScreen from "./src/screens/VideoDetailScreen"; // ✅ Import VideoDetail screen
+import ChannelScreen from "./src/screens/ChannelScreen";
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Login"> 
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="ChannelPage/[id]" component={HomeScreen} />
+        <Stack.Screen name="ChannelPage" component={ChannelScreen} />
         <Stack.Screen name="Feed" component={FeedScreen} />
         <Stack.Screen 
           name="VideoDetail" 
