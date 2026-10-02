@@ -9,7 +9,7 @@ console.log("Current apps:", getApps().length);
 const firebaseConfig = {
   projectId: 'app-idea-48f7b',
   appId: '1:326978844574:android:c4e238eeaf169f7b10488f',
-  apiKey: 'AIzaSyC5F_hVkEVuOb9FwWd225YVFmqvuRJrpVw',
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
   storageBucket: 'app-idea-48f7b.firebasestorage.app',
 };
 

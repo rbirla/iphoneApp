@@ -20,3 +20,14 @@ __pycache__/
 # API keys and sensitive files
 *api key*
 *.key
+
+# Credentials and local config (never commit)
+.env.*
+!.env.example
+MongoDB.txt
+*api_key*
+*api_keys*
+*credentials*
+google-services.json
+GoogleService-Info.plist
+.claude/settings.local.json
